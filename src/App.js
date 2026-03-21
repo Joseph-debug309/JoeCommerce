@@ -1,24 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Signup from './components/Signup';
+import Signin from './components/Signin';
+import Addproducts from './components/Addproducts';
+import Getproducts from './components/Getproducts';
+import Makepayment from './components/Makepayments';
+import Notfound from './components/Notfound';
 
 function App() {
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h2>Welcome to JoeCommerce</h2>
       </header>
+      <Routes>
+        <Route path='/' element={<Getproducts/>} />
+        <Route path='/signup' element={<Signup/>} />
+        <Route path='/signin' element={<Signin/>} />
+        <Route path='/addproducts' element={<Addproducts/>} />
+        <Route path='/makepayment' element={<Makepayment/>} />
+        <Route path='*' element={<Notfound/>} />
+      </Routes>
     </div>
+    </Router>
   );
 }
 
