@@ -1,6 +1,7 @@
 import React, { useState , useRef } from 'react'
 import Loader from './Loader';
 import axios from 'axios';
+import MyButton from './MyButton';
 
 const Addproducts = () => {
 
@@ -128,7 +129,7 @@ const Addproducts = () => {
            onChange={(e) => setProductPhoto(e.target.files[0])} 
            ref={imageInputRef}/> <br />
 
-           <input type="submit" 
+           <MyButton type="submit" 
            value='Add Item'
            className='btn btn-outline-primary'
             />

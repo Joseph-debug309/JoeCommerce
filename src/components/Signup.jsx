@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link , useNavigate } from 'react-router-dom';
+import MyButton from './MyButton';
+import TerminalCard from './TerminalCard';
 
 
 const Signup = () => {
@@ -115,7 +117,7 @@ try {
           {/*{phone}*/}
         
 
-          <input type="submit" value="signup" className='btn btn-primary' />
+          <MyButton type="submit" value="signup" className='btn btn-primary' />
           <br /><br />
 
           Already have an account? <Link to={'/signin'}>Signin</Link>

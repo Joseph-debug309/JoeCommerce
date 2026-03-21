@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import MyButton from './MyButton';
+import TerminalCard from './TerminalCard';
 
 const Signin = () => {
   
@@ -64,6 +66,7 @@ const Signin = () => {
 
   return (
     <div className='row justify-content-center mt-4'>
+      
       <div className="col-md-6 card shadow p-4">
         <h1 className='text-primary'>Sign In</h1>
 
@@ -88,9 +91,9 @@ const Signin = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}/> <br />
 
-          <input type="submit"
+          <MyButton type="submit"
           value="Sign In"
-          className='btn btn-primary' /> <br />
+          className /> <br />
           Don't have an account? <Link to={'/signup'}>Register</Link>
         </form>
       </div>

@@ -7,11 +7,13 @@ import Addproducts from './components/Addproducts';
 import Getproducts from './components/Getproducts';
 import Makepayment from './components/Makepayments';
 import Notfound from './components/Notfound';
+import UiverseContainer from './components/UiverseContainer';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <UiverseContainer></UiverseContainer>
       <header className="App-header">
         <h2>Welcome to JoeCommerce</h2>
       </header>
@@ -25,6 +27,8 @@ function App() {
       </Routes>
     </div>
     </Router>
+
+    
   );
 }
 

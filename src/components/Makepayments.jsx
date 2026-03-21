@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from './Loader';
+import MyButton from './MyButton';
 
 const Makepayment = () => {
 
@@ -113,7 +114,7 @@ const Makepayment = () => {
 
                     {/* {number} */}
 
-                    <input type="submit"
+                    <MyButton type="submit"
                     value="Make Payment"
                     className='btn btn-success' />
                 </form>
