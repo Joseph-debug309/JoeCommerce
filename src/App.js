@@ -7,16 +7,27 @@ import Addproducts from './components/Addproducts';
 import Getproducts from './components/Getproducts';
 import Makepayment from './components/Makepayments';
 import Notfound from './components/Notfound';
-import UiverseContainer from './components/UiverseContainer';
+import ContainerComponent from './components/ContainerComponent';
+
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <UiverseContainer></UiverseContainer>
+      <ContainerComponent>
+      
       <header className="App-header">
         <h2>Welcome to JoeCommerce</h2>
       </header>
+
+      
+
+      <nav>
+        <Link to="/" className='btn btn-primary m-2'>Home</Link>
+        <Link to="/addproducts" className='btn btn-primary m-2'>Add Products</Link>
+        <Link to="/signin" className='btn btn-primary m-2'>Sign In</Link>
+        <Link to="/signup" className='btn btn-primary m-2'>Sign Up</Link>
+      </nav>
+
       <Routes>
         <Route path='/' element={<Getproducts/>} />
         <Route path='/signup' element={<Signup/>} />
@@ -25,8 +36,15 @@ function App() {
         <Route path='/makepayment' element={<Makepayment/>} />
         <Route path='*' element={<Notfound/>} />
       </Routes>
-    </div>
+
+      <footer class="text-white p-2 bg-dark text-center">
+      <b>Developed by Joseph. &copy; 2026 All Rights Reserved</b>
+      </footer>
+
+    </ContainerComponent>
     </Router>
+
+    
 
     
   );
