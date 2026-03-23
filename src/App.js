@@ -8,6 +8,7 @@ import Getproducts from './components/Getproducts';
 import Makepayment from './components/Makepayments';
 import Notfound from './components/Notfound';
 import ContainerComponent from './components/ContainerComponent';
+import Navbar from './components/Navbar';
 
 
 function App() {
@@ -19,14 +20,7 @@ function App() {
         <h2>Welcome to JoeCommerce</h2>
       </header>
 
-      
-
-      <nav>
-        <Link to="/" className='btn btn-primary m-2'>Home</Link>
-        <Link to="/addproducts" className='btn btn-primary m-2'>Add Products</Link>
-        <Link to="/signin" className='btn btn-primary m-2'>Sign In</Link>
-        <Link to="/signup" className='btn btn-primary m-2'>Sign Up</Link>
-      </nav>
+      <Navbar/>
 
       <Routes>
         <Route path='/' element={<Getproducts/>} />

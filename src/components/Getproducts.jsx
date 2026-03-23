@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Loader from './Loader';
 import { Navigate, useNavigate } from 'react-router-dom';
+import MyCarousel from './MyCarousel';
 
 const Getproducts = () => {
 
@@ -59,6 +60,7 @@ const Getproducts = () => {
 
   return (
     <div className='row' >
+    <MyCarousel/>
       <h3 className='text-primary' >Available Items</h3>
 
       { loading && <Loader/> }
