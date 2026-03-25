@@ -5,19 +5,19 @@ const MyCarousel = () => {
 
   const slides = [
     {
-      image: "https://www.vecteezy.com/photo/71038960-clean-and-modern-aesthetic-workspace-with-laptop",
-      caption: "Serene Valley",
-      description: "A peaceful morning in the heart of nature."
+      image: "https://images.unsplash.com/3/www.madebyvadim.com.jpg?q=80&w=882&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      caption: "Smart Accessories",
+      description: "Best deals on smart accessories."
     },
     {
-      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800",
-      caption: "Mountain Peaks",
-      description: "Reaching new heights in the alpine range."
+      image: "https://images.unsplash.com/photo-1506169894395-36397e4aaee4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGFjY2Vzc29yaWVzfGVufDB8fDB8fHww",
+      caption: "Travell essentials",
+      description: "Get travelling essentials for you at best prices."
     },
     {
-      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800",
-      caption: "Lakeside Sunset",
-      description: "The perfect end to a long summer day."
+      image: "https://images.unsplash.com/photo-1559563458-527698bf5295?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGFjY2Vzc29yaWVzfGVufDB8fDB8fHww",
+      caption: "Beauty and products",
+      description: "Get beauty products at best prices."
     }
   ];
 
@@ -62,11 +62,11 @@ const navButtonStyle = {
   position: 'absolute',
   top: '50%',
   transform: 'translateY(-50%)',
-  background: 'rgba(255,255,255,0.7)',
+  background: 'rgba(255, 255, 255, 0.23)',
   border: 'none',
   padding: '10px',
   cursor: 'pointer',
-  borderRadius: '50%',
+  borderRadius: '5%',
   zIndex: 10
 };
 

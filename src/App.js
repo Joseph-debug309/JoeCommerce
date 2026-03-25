@@ -9,6 +9,7 @@ import Makepayment from './components/Makepayments';
 import Notfound from './components/Notfound';
 import ContainerComponent from './components/ContainerComponent';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -31,9 +32,8 @@ function App() {
         <Route path='*' element={<Notfound/>} />
       </Routes>
 
-      <footer class="text-white p-2 bg-dark text-center">
-      <b>Developed by Joseph. &copy; 2026 All Rights Reserved</b>
-      </footer>
+      <Footer/>
+
 
     </ContainerComponent>
     </Router>
