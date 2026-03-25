@@ -74,7 +74,7 @@ const Footer = () => {
         <hr style={{ borderColor: '#444' }} />
 
         <p className="text-center mb-0">
-          © {new Date().getFullYear()} Your Company. All rights reserved.
+          © {new Date().getFullYear()} By Joseph. All rights reserved.
         </p>
       </div>
     </footer>

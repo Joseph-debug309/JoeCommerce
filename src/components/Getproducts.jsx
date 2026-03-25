@@ -77,7 +77,7 @@ const Getproducts = () => {
           className='product_img mt-3' />
 
             <div className="card-body">
-            <h5 className="text-secondary">{product.product_name.slice(0, 26)}...</h5>
+            <h5 className="text-secondary">{product.product_name.slice(0, 23)}...</h5>
 
             <p className="text-light"> {product.product_description.slice(0, 100)}... </p>
 
