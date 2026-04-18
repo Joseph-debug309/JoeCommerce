@@ -54,6 +54,16 @@ const Footer = () => {
     // ⦁	Set the loading hook back to default
     setLoading("");
 
+    // Check whether the user exists as part of your response from the API
+    if(response.data.user){
+      // If user is there definitely the details entered during signin are correct
+      // setSuccess("Login successful")
+    }
+    else{
+      // User is not found, meaning details are incorrect
+      setError("login failed. Please try again...")
+    }
+
   }
   catch(error){
     // Set loading back to default
@@ -86,6 +96,11 @@ const Footer = () => {
           <div className="col-md-4">
             <h5 style={styles.heading}>Contact Us</h5>
             <form>
+
+              <h5 className="text-secondary">{loading}</h5>
+              <h3 className="text-sucess">{success}</h3>
+              <h4 className="text-danger">{error}</h4>
+
               <input
                 type="email"
                 className="form-control"
@@ -96,7 +111,7 @@ const Footer = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-                {email}
+                {/* {email} */}
 
               <textarea
                 className="form-control"
