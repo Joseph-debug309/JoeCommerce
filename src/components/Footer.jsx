@@ -58,6 +58,7 @@ const Footer = () => {
     if(response.data.user){
       // If user is there definitely the details entered during signin are correct
       // setSuccess("Login successful")
+      navigate("/")
     }
     else{
       // User is not found, meaning details are incorrect
