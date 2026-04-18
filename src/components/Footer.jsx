@@ -32,6 +32,9 @@ const Footer = () => {
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
 
+    // Below we have the useNavigate hook to redirect us to another pg on sucessfull signin
+  const navigate = useNavigate()
+
     // Below is the function that will handle the submit message function
     const handlesubmit = async (e) => {
     // prevent the site from reloading
