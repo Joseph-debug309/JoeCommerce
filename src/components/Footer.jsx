@@ -1,5 +1,6 @@
 
 import React from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Footer = () => {
