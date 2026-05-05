@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import axios from 'axios';
+import Loader from './Loader';
 import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
@@ -29,12 +31,9 @@ const Footer = () => {
   const [message, setMessage] = useState("");
 
   // Declare the three additional hooks
-    const [loading, setLoading] = useState("");
+    const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
-
-    // Below we have the useNavigate hook to redirect us to another pg on sucessfull signin
-  const navigate = useNavigate()
 
     // Below is the function that will handle the submit message function
     const handlesubmit = async (e) => {
@@ -42,7 +41,7 @@ const Footer = () => {
     e.preventDefault()
 
     // Update the loading hook with a message
-    setLoading("Please wait as we submit your data")
+    setLoading(true)
 
   try{
     // Create a formData object that will hold the email and the message
@@ -56,29 +55,30 @@ const Footer = () => {
     const response = await axios.post("http://josephdebug.alwaysdata.net/api/contact_us", formdata)
 
     // ⦁	Set the loading hook back to default
-    setLoading("");
+    setLoading(false);
 
-    // Check whether the user exists as part of your response from the API
-    if(response.data.user){
-      // If user is there definitely the details entered during signin are correct
-      // setSuccess("Login successful")
-      navigate("/")
-    }
-    else{
-      // User is not found, meaning details are incorrect
-      setError("login failed. Please try again...")
-    }
+    // Update the success hook with a message (11)
+      setSuccess(response.data.message)
 
+    // Clear the inputs
+    setEmail("");
+    setMessage("")
+
+    e.target.reset()
+
+      setTimeout(() => {
+        setSuccess("");
+      }, 5000);
   }
+
   catch(error){
     // Set loading back to default
-    setLoading("")
+    setLoading(false)
 
     // Update the error hook with a message
-    setError("Oooops something went wrong. Try again")
+    setError(error.message)
     
   }
-
 }
 
 
@@ -102,7 +102,8 @@ const Footer = () => {
             <h5 style={styles.heading}>Contact Us</h5>
             <form>
 
-              <h5 className="text-secondary">{loading}</h5>
+              {/* Bind the loading hooks */}
+              {loading && <Loader/>}
               <h3 className="text-sucess">{success}</h3>
               <h4 className="text-danger">{error}</h4>
 
@@ -142,9 +143,9 @@ const Footer = () => {
           {/* Social Media */}
           <div className="col-md-4">
             <h5 style={styles.heading}>Follow Us</h5>
-            <a href="www.facebook.com" style={styles.link}>Facebook</a>
-            <a href="https//www.x.com" style={styles.link}>Twitter</a>
-            <a href="www.instagram.com" style={styles.link}>Instagram</a>
+            <a href="https://web.facebook.com/?_rdc=1&_rdr" style={styles.link}>Facebook</a>
+            <a href="https://x.com/?lang=en" style={styles.link}>Twitter</a>
+            <a href="https://www.instagram.com/" style={styles.link}>Instagram</a>
           </div>
 
         </div>

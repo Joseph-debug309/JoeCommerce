@@ -82,8 +82,7 @@ const Addproducts = () => {
       <div className="col-md-6 p-4 card shadow">
         <h3 className='text-primary'>Add Items</h3>
 
-        {/* Bind the loading hooks */}
-        {loading && <Loader/>}
+        q                                                                         
 
         <h3 className="text-success">{success}</h3>
         <h4 className='text-danger'>{error}</h4>

@@ -1,0 +1,51 @@
+﻿Keywords,Utterance,Response
+Greeting,Is anyone there?,Hi there! I'm your JoeCommerce assistant. Ready to help!
+Greeting,Good morning,Good morning! Hope you're having a great day. What can I do for you?
+Help,What can you do?,"I can help track orders, process returns, or find products for you!"
+Help,I need assistance,I'm here for you! You can ask about your recent order or site features.
+Order Status,Where is my order?,I can check that! Please provide your order number to see the status.
+Order Status,Track my package,Sure thing. Just enter your tracking ID or order number below.
+Order Status,Order #12345 status,Checking... Your order is currently out for delivery and should arrive today!
+Order Status,Delivery update,Your package was last scanned at the regional sorting center.
+Order Status,How long till it arrives?,Standard shipping usually takes 3-5 business days. Check your email for a link.
+Returns,I want to return an item,No problem. You can start a return in your 'Order History' section.
+Returns,Refund policy,We offer a 30-day money-back guarantee on all unused items.
+Returns,Wrong size received,I'm sorry about that! Let's get a free exchange label generated for you.
+Returns,Can I cancel my return?,"Yes, as long as the item hasn't been shipped back yet. Contact support."
+Returns,Missing refund,Refunds typically take 5-7 business days to appear on your statement.
+Shipping,Do you ship internationally?,"Yes, joecommerce ships to over 50 countries! Check our shipping page for rates."
+Shipping,Shipping cost,"Standard shipping is $5.99, or free on orders over $50."
+Shipping,Express delivery,We offer Next-Day delivery for an additional fee at checkout.
+Shipping,Change address,You can update your address if the order hasn't shipped yet. Hurry!
+Shipping,PO Box delivery,"We do ship to PO Boxes via standard mail, but not via express carriers."
+Product,Are items in stock?,"If you can add it to your cart, it’s in stock! Out-of-stock items are marked."
+Product,Size guide,You can find our size chart link right next to the 'Add to Cart' button.
+Product,Material info,We list all materials under the 'Product Details' tab on each page.
+Product,Restock date,Sign up for 'Back in Stock' alerts on the product page to get notified!
+Product,Product reviews,Scroll to the bottom of any product page to see what other 'Joes' think!
+Payment,Payment methods,"We accept Visa, Mastercard, AMEX, PayPal, and Apple Pay."
+Payment,Promo code not working,Double-check the expiry date and ensure the items qualify for the discount.
+Payment,Security,All transactions are encrypted. We never store your full credit card info.
+Payment,Can I pay with Bitcoin?,"Currently, we only accept standard currency and major digital wallets."
+Payment,Installment plan,We partner with Affirm and Klarna for buy-now-pay-later options.
+Account,Reset password,Click 'Forgot Password' on the login screen to receive a reset link.
+Account,Delete account,We’re sad to see you go! Contact our privacy team to close your account.
+Account,Change email,You can update your email under 'Account Settings' -> 'Profile'.
+Account,Loyalty points,Earn 1 point for every $1 spent. You can redeem them at checkout!
+Account,Newsletter signup,Scroll to the footer to join our list for 10% off your first order.
+Discounts,Current sales,Check our 'Hot Deals' section for the latest discounts up to 50% off.
+Discounts,First order discount,Use code WELCOME10 at checkout for a 10% discount on your first buy.
+Discounts,Student discount,Verify your status via UNiDAYS to get a 15% student discount.
+Discounts,Military discount,We offer 15% off for veterans. Upload your ID at checkout to verify.
+Discounts,Bulk buy,Buying for a team? Contact sales@joecommerce.com for bulk pricing.
+Cart,Items disappeared,Items stay in your cart for 24 hours. Try logging in to save them longer.
+Cart,Edit cart,Click the cart icon at the top right to remove items or change quantities.
+Cart,Empty cart,Looks like your cart is empty. Ready to find something amazing?
+Support,Talk to human,I'll connect you to a live agent. Please hold for a moment.
+Support,Store hours,Our online shop is open 24/7! Customer support is online 9am-5pm EST.
+Support,Phone number,You can reach us at 1-800-JOE-COMM during business hours.
+Support,Complaint,I'm sorry you're unhappy. Let me get a manager to assist you immediately.
+Support,Feedback,We love hearing from you! Please fill out our 1-minute feedback survey.
+Support,Location,We are an online-first retailer based in New York City.
+Technical,Website is slow,Try clearing your browser cache or switching to a different browser.
+Technical,App crash,Please ensure you have the latest version of the JoeCommerce app installed.

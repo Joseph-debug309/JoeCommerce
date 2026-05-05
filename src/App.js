@@ -16,10 +16,6 @@ function App() {
   return (
     <Router>
       <ContainerComponent>
-      
-      <header className="App-header">
-        <h2>Welcome to JoeCommerce</h2>
-      </header>
 
       <Navbar/>
 
