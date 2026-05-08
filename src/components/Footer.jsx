@@ -100,7 +100,7 @@ const Footer = () => {
           {/* Contact Form */}
           <div className="col-md-4">
             <h5 style={styles.heading}>Contact Us</h5>
-            <form>
+            <form onSubmit={handlesubmit}>
 
               {/* Bind the loading hooks */}
               {loading && <Loader/>}

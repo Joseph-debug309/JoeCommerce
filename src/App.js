@@ -10,33 +10,35 @@ import Notfound from './components/Notfound';
 import ContainerComponent from './components/ContainerComponent';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Cart from './components/Cart';
+import Wishlist from './components/Wishlist';
+import { AuthProvider } from './context/AuthContext';
+import Chatbot from './components/Chatbot';
 
 
 function App() {
   return (
     <Router>
-      <ContainerComponent>
+      <AuthProvider>
+        <ContainerComponent>
+          <Navbar />
+          <Chatbot />
 
-      <Navbar/>
+          <Routes>
+            <Route path='/' element={<Getproducts/>} />
+            <Route path='/signup' element={<Signup/>} />
+            <Route path='/signin' element={<Signin/>} />
+            <Route path='/addproducts' element={<Addproducts/>} />
+            <Route path='/cart' element={<Cart/>} />
+            <Route path='/wishlist' element={<Wishlist/>} />
+            <Route path='/makepayment' element={<Makepayment/>} />
+            <Route path='*' element={<Notfound/>} />
+          </Routes>
 
-      <Routes>
-        <Route path='/' element={<Getproducts/>} />
-        <Route path='/signup' element={<Signup/>} />
-        <Route path='/signin' element={<Signin/>} />
-        <Route path='/addproducts' element={<Addproducts/>} />
-        <Route path='/makepayment' element={<Makepayment/>} />
-        <Route path='*' element={<Notfound/>} />
-      </Routes>
-
-      <Footer/>
-
-
-    </ContainerComponent>
+          <Footer/>
+        </ContainerComponent>
+      </AuthProvider>
     </Router>
-
-    
-
-    
   );
 }
 

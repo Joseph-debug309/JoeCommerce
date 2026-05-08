@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import MyButton from './MyButton';
-import TerminalCard from './TerminalCard';
+import { useAuth } from '../context/AuthContext';
 
 const Signin = () => {
   
@@ -17,6 +17,7 @@ const Signin = () => {
 
   // Below we have the useNavigate hook to redirect us to another pg on sucessfull signin
   const navigate = useNavigate()
+  const { login } = useAuth();
 
   // below is th e function to handle the signin function
   const handlesubmit = async (e) => {
@@ -42,9 +43,15 @@ const Signin = () => {
     // Check whether the user exists as part of your response from the API
     if(response.data.user){
       // If user is there definitely the details entered during signin are correct
-      // setSuccess("Login successful")
+      // Store user data in context
+      login({
+        username: response.data.user.username || email.split('@')[0],
+        email: response.data.user.email || email,
+        userId: response.data.user.id
+      });
+      setSuccess("Login successful")
       // If it is sucessfull, let the person be redirected to the home page
-      navigate("/")
+      setTimeout(() => navigate("/"), 1500)
     }
     else{
       // User is not found, meaning details are incorrect

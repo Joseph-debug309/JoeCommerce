@@ -1,128 +1,129 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 import MyButton from './MyButton';
+import { useAuth } from '../context/AuthContext';
+import '../css/Makepayments.css';
 
 const Makepayment = () => {
-
-    // destructure the details passed from the Getproducts component
-    // The useLoacation hook allows us to get/destructure the properties passed from the previous component.
     const location = useLocation();
-    const { product } = location.state || {};
+    const { product, cartItems, totalPrice } = location.state || {};
 
-    console.log(location)
+    const navigate = useNavigate();
+    const { clearCart } = useAuth();
 
-    // declare the navigate hook
-    const navigate = useNavigate()
+    const img_url = "https://josephdebug.alwaysdata.net/static/images/";
 
-    // console.log("The details passed from getproducts are: ",product)
-    // below we specify the image base url
-    const img_url = "https://josephdebug.alwaysdata.net/static/images/"
+    // Determine if it's a single product or multiple items
+    const isSingleProduct = !!product;
+    const items = cartItems || (product ? [product] : []);
+    const totalAmount = totalPrice || (product ? product.product_cost : 0);
 
-    // initialize hooks to manage the state of your application
-    const [number, setNumber] = useState("")
+    const [number, setNumber] = useState("");
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
 
-    // create a function that will handle the submit action
-    const handlesubmit = async (e) =>{
-        // prevent the site from reloading
-        e.preventDefault()
+    const handlesubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
 
-        // update the loading hook
-        setLoading(true)
+        try {
+            const formdata = new FormData();
+            formdata.append("phone", number);
+            formdata.append("amount", totalAmount);
 
-        try{
-            // create a form data object
-            const formdata = new FormData()
+            const response = await axios.post("https://josephdebug.alwaysdata.net/api/mpesa_payment", formdata);
 
-            // append the data to the form data
-            formdata.append("phone", number)
-            formdata.append("amount", product.product_cost)
+            setLoading(false);
+            setSuccess(response.data.message);
 
-            const response = await axios.post("https://josephdebug.alwaysdata.net/api/mpesa_payment", formdata)
+            if (cartItems) {
+                clearCart();
+            }
 
-            // set loading back to default
-            setLoading(false)
-
-            // update the success hook with the message
-            setSuccess(response.data.message)
-
-            // clear the success message after 5 seconds
             setTimeout(() => {
                 setSuccess("");
-            }, 5000);
-        }
-        catch(error){
-            // if there is an error respond to error
-            setLoading(false)
+                navigate("/");
+            }, 3000);
+        } catch (error) {
+            setLoading(false);
+            setError(error.message);
 
-            // update the error hook with the error message
-            setError(error.message)
-
-            // clear the error message after 5 seconds
             setTimeout(() => {
                 setError("");
             }, 5000);
         }
-    }
+    };
 
+    return (
+        <div className='row justify-content-center'>
+            <h1 className="text-success">Make Payment - Lipa na M-Pesa</h1>
 
-  return (
-    <div className='row justify-content-center'>
-        {/* <button className='btn btn-outline-primary'> Back to Product </button> */}
+            <div className="col-md-1">
+                <input 
+                    type="button"
+                    className="btn btn-primary"
+                    value="<- Back"
+                    onClick={() => navigate(cartItems ? "/cart" : "/")} 
+                />
+            </div>
 
-        <h1 className="text-success">Make Payment - Lipa na M-Pesa</h1>
-
-        <div className="col-md-1">
-            <input type="button"
-            className="btn btn-primary"
-            value="<- Back"
-            onClick={() => navigate("/") } />
-        </div>
-
-        <div className="col-md-6 card shadow p-4">
-
-
-
-            <img src={img_url + product.product_photo} alt="Product name" className='product_img'/>
-
-            <div className="card-body ">
-                <h2 className="text-info"> {product.product_name} </h2>
-
-                <p className="text-light"> {product.product_description} </p>
-
-                <h3 className="text-warning">Kes {product.product_cost} </h3> <br />
+            <div className="col-md-6 card shadow p-4">
+                {isSingleProduct ? (
+                    <>
+                        <img src={img_url + product.product_photo} alt="Product name" className='product_img'/>
+                        <div className="card-body ">
+                            <h2 className="text-info"> {product.product_name} </h2>
+                            <p className="text-light"> {product.product_description} </p>
+                            <h3 className="text-warning">Kes {product.product_cost} </h3> <br />
+                        </div>
+                    </>
+                ) : (
+                    <div className="card-body">
+                        <h2 className="text-info">Order Summary</h2>
+                        <div className="order-items">
+                            {items.map((item) => (
+                                <div key={item.product_id} className="order-item">
+                                    <img src={img_url + item.product_photo} alt={item.product_name} className="order-item-img" />
+                                    <div className="order-item-details">
+                                        <h5>{item.product_name}</h5>
+                                        <p>Quantity: {item.quantity || 1}</p>
+                                        <p className="text-warning">Kes {item.product_cost * (item.quantity || 1)}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <hr />
+                        <h3 className="text-success">Total: Kes {totalAmount}</h3>
+                    </div>
+                )}
 
                 <form onSubmit={handlesubmit}>
-
-                     {/* bind the loading hook */}
                     {loading && <Loader />}
-
                     <h3 className="text-success"> {success} </h3>
                     <h4 className="text-danger"> {error} </h4>
 
+                    <input 
+                        type="number"
+                        className='form-control'
+                        placeholder='Enter the Phone number 254XXXXXXX'
+                        required
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)} 
+                    /> 
+                    <br />
 
-                    <input type="number"
-                    className='form-control'
-                    placeholder='Enter the Phone number 254XXXXXXX'
-                    required
-                    value={number}
-                    onChange={(e) => setNumber(e.target.value)} /> <br />
-
-                    {/* {number} */}
-
-                    <MyButton type="submit"
-                    value="Make Payment"
-                    className='btn btn-success' />
+                    <MyButton 
+                        type="submit"
+                        value="Make Payment"
+                        className='btn btn-success' 
+                    />
                 </form>
             </div>
         </div>
-
-    </div>
-  )
-}
+    );
+};
 
 export default Makepayment;

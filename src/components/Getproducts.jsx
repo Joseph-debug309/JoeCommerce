@@ -1,18 +1,25 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Loader from './Loader';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import MyCarousel from './MyCarousel';
+import { useAuth } from '../context/AuthContext';
+import '../css/Getproducts.css';
 
 const Getproducts = () => {
 
   //	We create a hook to get the products (1)
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [searchParams] = useSearchParams();
+  const [addedToCart, setAddedToCart] = useState(null);
+  const [addedToWishlist, setAddedToWishlist] = useState(null);
 
   // Declare the navigate hook
   const navigate = useNavigate()
+  const { addToCart, addToWishlist, isAuthenticated } = useAuth();
 
   // Declare the navigate hook// below we specifiy the image base url
   const img_url = "https://josephdebug.alwaysdata.net/static/images/"
@@ -31,6 +38,7 @@ const Getproducts = () => {
 
       // Update the products hook withthe response from the API(6)
       setProducts(response.data)
+      setFilteredProducts(response.data)
 
       // Set the loading hook back to default (7)
       setLoading(false)
@@ -48,50 +56,123 @@ const Getproducts = () => {
     }
   }
 
-
+  // Filter products based on search query
+  useEffect(() => {
+    const searchQuery = searchParams.get('search');
+    if (searchQuery) {
+      const filtered = products.filter(product =>
+        product.product_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.product_description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [searchParams, products]);
 
   // We shall use the useEffect hook that automatically re-render new features incase of any changes.
   useEffect(() => {
     fetchProducts()
   }, [])
 
+  const handleAddToCart = (product) => {
+    if (!isAuthenticated) {
+      navigate('/signin');
+      return;
+    }
+    addToCart(product);
+    setAddedToCart(product.product_id);
+    setTimeout(() => setAddedToCart(null), 2000);
+  };
+
+  const handleAddToWishlist = (product) => {
+    if (!isAuthenticated) {
+      navigate('/signin');
+      return;
+    }
+    addToWishlist(product);
+    setAddedToWishlist(product.product_id);
+    setTimeout(() => setAddedToWishlist(null), 2000);
+  };
+
+  const handlePurchaseNow = (product) => {
+    if (!isAuthenticated) {
+      navigate('/signin');
+      return;
+    }
+    navigate("/makepayment", { state: { product } });
+  };
+
   // console.log(products)
 
+  const searchQuery = searchParams.get('search');
 
   return (
-    <div className='row' >
-    <MyCarousel/>
-      <h3 className='text-primary' >Available Items</h3>
+    <div className='products-container' >
+      <MyCarousel/>
+      
+      <div className="products-header">
+        <h3 className='text-primary'>Available Items</h3>
+        {searchQuery && <p className="search-info">Showing results for: <strong>{searchQuery}</strong></p>}
+      </div>
 
       { loading && <Loader/> }
       
       <h4 className='text-danger' >{error}</h4>
 
+      {filteredProducts.length === 0 && !loading && (
+        <div className="no-products">
+          <p>No products found. {searchQuery ? 'Try a different search.' : 'Check back soon!'}</p>
+        </div>
+      )}
+
       {/* map thee products fetched from the api to the user interface */}
 
-      {products.map((product) => (
-        <div className="col-md-3 justify-content-center mb-3">
-          <div className="card shadow">
-          <img src={img_url + product.product_photo} 
-          alt="product name" 
-          className='product_img mt-3' />
+      <div className="products-grid">
+        {filteredProducts.map((product) => (
+          <div key={product.product_id} className="col-md-12 justify-content-center mb-3">
+            <div className="card shadow product-card">
+              <div className="product-image-container">
+                <img src={img_url + product.product_photo} 
+                alt="product name" 
+                className='product_img' />
+                <button 
+                  className={`btn-wishlist ${addedToWishlist === product.product_id ? 'added' : ''}`}
+                  onClick={() => handleAddToWishlist(product)}
+                  title="Add to wishlist"
+                >
+                  {addedToWishlist === product.product_id ? '❤️' : '🤍'}
+                </button>
+              </div>
 
-            <div className="card-body">
-            <h5 className="text-secondary">{product.product_name.slice(0, 23)}...</h5>
+              <div className="card-body">
+                <h5 className="text-secondary product-name">{product.product_name.slice(0, 23)}...</h5>
 
-            <p className="text-light"> {product.product_description.slice(0, 100)}... </p>
+                <p className="text-muted product-description"> {product.product_description.slice(0, 100)}... </p>
 
-            <h4 className="text-warning"> Kes {product.product_cost} </h4>
+                <h4 className="text-warning product-price"> Kes {product.product_cost} </h4>
 
-            {/* how to move the data of a given component to another component by use of the useNavigate() hook. */}
- 
-          <button className="btn btn-outline-info" onClick={() => navigate("/makepayment",{state: {product}})}>Purchase Now</button>
-
+                <div className="product-buttons">
+                  <button 
+                    className={`btn btn-success btn-add-cart ${addedToCart === product.product_id ? 'added' : ''}`}
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    {addedToCart === product.product_id ? '✓ Added' : '🛒 Add to Cart'}
+                  </button>
+                  
+                  <button 
+                    className="btn btn-outline-info btn-purchase" 
+                    onClick={() => handlePurchaseNow(product)}
+                  >
+                    💳 Purchase Now
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      
-      )  )}
+        
+        ))}
+      </div>
 
       
     </div>
@@ -100,3 +181,5 @@ const Getproducts = () => {
 }
 
 export default Getproducts;
+
+
