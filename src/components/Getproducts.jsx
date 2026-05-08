@@ -148,7 +148,7 @@ const Getproducts = () => {
               <div className="card-body">
                 <h5 className="text-secondary product-name">{product.product_name.slice(0, 23)}...</h5>
 
-                <p className="text-muted product-description"> {product.product_description.slice(0, 100)}... </p>
+                <p className="text-light product-description"> {product.product_description.slice(0, 100)}... </p>
 
                 <h4 className="text-warning product-price"> Kes {product.product_cost} </h4>
 
